@@ -1,0 +1,1 @@
+System.register(["./index-legacy.20250120.vQ7ODksl.js"],(function(e,t){"use strict";var n,r,u;return{setters:[e=>{n=e._,r=e.v,u=e.b}],execute:function(){e("default",n({},[["render",function(e,t){return r(),u("div",null,"个人中心")}]]))}}}));
