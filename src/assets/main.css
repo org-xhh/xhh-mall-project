@@ -1,0 +1,7 @@
+@import './base.css';
+@import './css/iconfont.css';
+@import './element-plus.less';
+
+#app {
+  font-weight: normal;
+}
