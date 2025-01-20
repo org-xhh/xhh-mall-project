@@ -1,0 +1,1 @@
+import{_ as o,b as s,d as t,v as n}from"./index.20250120.CvA4Fax-.js";const c={},a={class:"not-found-page"};function r(d,e){return n(),s("div",a,e[0]||(e[0]=[t("div",{class:"flex-center"},"404",-1)]))}const f=o(c,[["render",r],["__scopeId","data-v-8ce3622e"]]);export{f as default};
