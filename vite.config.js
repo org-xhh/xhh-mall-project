@@ -28,6 +28,7 @@ import eslintPlugin from 'vite-plugin-eslint'
 // https://vitejs.dev/config/
 // command
 export default defineConfig(({ mode }) => ({
+  base: '/xhh-mall-project/',
   plugins: [
     vue(),
     AutoImport({

@@ -40,7 +40,7 @@ router.beforeEach(async (to, from, next) => {
 
 const versionIsUpdate = async () => {
   if (process.env.NODE_ENV === 'production') {
-    const response = await axios.get(`//${window.location.host}/version.json`)
+    const response = await axios.get(`//${window.location.host}/xhh-mall-project/version.json`)
     // console.log('版本比较', __PROJECT_VERSION__, response.version)
     // 发布新版，页面刷新前__PROJECT_VERSION__是上个版本的version，response.version是最新打包的version
     if (__PROJECT_VERSION__ !== response.version) {
