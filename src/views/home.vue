@@ -34,6 +34,11 @@
       </div>
     </div>
 
+    <!-- <div>
+      {{ $resize }}
+      {{ userType }}
+    </div> -->
+
     <main>
       <div class="main-part main-b-width">
         <div class="channel-part flex align-start">
@@ -98,6 +103,7 @@
 </template>
 
 <script setup>
+// import { inject } from 'vue'
 import { ref, reactive, onMounted, onUnmounted, getCurrentInstance, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import Sidebar from '@/components/Sidebar'
@@ -131,6 +137,8 @@ let pageWidth = ref(resizeFn().docWidth)
 window.addEventListener('resize', () => {
   pageWidth.value = resizeFn().docWidth
 })
+// 获取全局变量 provide inject
+// let userType = ref(inject('globalUserType'))
 
 let carouselList = ref([])
 

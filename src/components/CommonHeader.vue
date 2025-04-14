@@ -234,6 +234,7 @@ header {
     #threejs-wrap {
       width: 200px;
       height: 100px;
+      cursor: pointer;
     }
   }
 }

@@ -34,7 +34,11 @@ app.config.errorHandler = (err, vm, info) => {
 }
 
 import { resize } from '@/utils/resize'
+// 注册全局方法方式1
 app.config.globalProperties.$resize = resize
+
+// 注册全局变量方式2
+app.provide('globalUserType', 1)
 
 import VueQrcode from 'vue-qrcode'
 app.component('vue-qrcode', VueQrcode)
