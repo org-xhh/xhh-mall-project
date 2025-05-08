@@ -16,7 +16,7 @@ import '@/permission'
 
 const app = createApp(App)
 
-// element-plus svg图标
+// element-plus el-icon 图标
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }

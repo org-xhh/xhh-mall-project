@@ -292,7 +292,8 @@
         </div>
 
         <div class="submit-btn-wrap">
-          <button class="submit-btn" @click="goOrderPayment">提交订单</button>
+          <button class="btn transaction-snapshot" @click="transactionSnap">交易快照</button>
+          <button class="btn submit-btn" @click="goOrderPayment">提交订单</button>
         </div>
       </div>
     </div>
@@ -306,6 +307,8 @@ import { ref, reactive } from 'vue'
 import SiteNav from '@/components/SiteNav'
 import CommonFooter from '@/components/CommonFooter'
 import StepList from '@/components/StepList'
+
+import html2canvas from 'html2canvas'
 
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -466,6 +469,18 @@ const vFocus = {
 function goOrderPayment() {
   router.replace({
     name: 'orderPayment'
+  })
+}
+// 交易快照
+function transactionSnap() {
+  const element = document.querySelector('.confirm-order-page') // 需要截图的DOM元素
+  html2canvas(element).then((canvas) => {
+    const imgData = canvas.toDataURL('image/png')
+
+    const link = document.createElement('a')
+    link.href = imgData
+    link.download = 'screenshot.png' // 设置下载文件名
+    link.click()
   })
 }
 </script>
@@ -991,23 +1006,28 @@ function goOrderPayment() {
       }
       .submit-btn-wrap {
         text-align: right;
-        margin-top: 10px;
-        .submit-btn {
+        margin-top: 15px;
+        > .btn {
           width: 135px;
-          height: 36px;
-          line-height: 36px;
+          height: 46px;
+          line-height: 46px;
           margin-right: 10px;
           padding: 0;
-          background-color: @danger-color;
           color: #fff;
           font-weight: 700;
           font-size: 16px;
           font-family: arial, 'Microsoft YaHei';
-          border-radius: 3px;
+          border-radius: 4px;
           cursor: pointer;
           border: 0;
-          &:hover {
-            background-color: @focus-color;
+          &.submit-btn {
+            background-color: @danger-color;
+            &:hover {
+              background-color: @focus-color;
+            }
+          }
+          &.transaction-snapshot {
+            background-color: @primary-color;
           }
         }
       }

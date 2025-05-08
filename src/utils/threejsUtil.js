@@ -1,5 +1,11 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+/*
+场景（Scene）：一个虚拟的 3D 空间，包含所有要渲染的物体。
+相机（Camera）：场景中的观察者，决定了哪些部分会被渲染出来。
+渲染器（Renderer）：负责将场景和相机的信息渲染到屏幕上。
+网格（Mesh）：由几何体（Geometry）和材质（Material）组成的物体。
+*/
 
 export function initThreeScene(container, canvasWidth, canvasHeight) {
   // 建立场景

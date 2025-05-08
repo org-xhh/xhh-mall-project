@@ -182,3 +182,26 @@ input[type='checkbox'] {
 .min-width-b {
   min-width: 1190px;
 }
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.view-fade-in-out {
+  animation: fadeInOut linear;
+  animation-timeline: view();
+  animation-range: entry exit;
+}

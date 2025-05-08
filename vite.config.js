@@ -17,13 +17,15 @@ import autoprefixer from 'autoprefixer'
 
 import { formatDate } from '@web-xhh/web-utils'
 
-// 按需引入
+// 按需导入-自动导入
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // 实时校验代码
 import eslintPlugin from 'vite-plugin-eslint'
+
+import { visualizer } from 'rollup-plugin-visualizer'
 
 // https://vitejs.dev/config/
 // command
@@ -49,7 +51,13 @@ export default defineConfig(({ mode }) => ({
     refreshVersion({
       version: nowTime
     }),
-    eslintPlugin()
+    eslintPlugin(),
+    visualizer({
+      filename: './dist/stats.html', // 分析报告的输出位置
+      open: true, // 构建完成后在浏览器中自动打开报告
+      gzipSize: true, // 显示gzip后的体积
+      brotliSize: true // 显示brotli后的体积
+    })
   ],
   // IP启动
   server: {
@@ -118,7 +126,17 @@ export default defineConfig(({ mode }) => ({
       output: {
         entryFileNames: `assets/[name].${formatDate('', 'yyyyMMdd')}.[hash].js`, // 修改入口文件名 index
         chunkFileNames: `assets/[name].[hash].js`, // 修改代码分割时的文件名
-        assetFileNames: `assets/[name].[hash].[ext]` // 修改资源文件名，比如图片、字体、css等。
+        assetFileNames: `assets/[name].[hash].[ext]`, // 修改资源文件名，比如图片、字体、css等。
+        manualChunks: {
+          pinia: ['pinia'],
+          router: ['vue-router'],
+          // 将 vue 相关的模块打包到单独的 chunk
+          vue: ['vue'],
+          element: ['element-plus'],
+          // 将大型库或组件单独打包
+          largeLibrary: ['axios'],
+          three: ['three']
+        }
       }
     },
     sourcemap: mode !== 'production'

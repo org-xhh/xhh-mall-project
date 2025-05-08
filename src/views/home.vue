@@ -77,7 +77,7 @@
         <div class="recommend-part">
           <div class="title">为你推荐</div>
           <div class="recommend-list flex flex-wrap">
-            <div class="recommend-item" v-for="(item, index) in recommendList" :key="index">
+            <div class="recommend-item view-fade-in-out" v-for="(item, index) in recommendList" :key="index">
               <div class="recommend-item-content" @click="goGoodsDetail(item)">
                 <div class="item-content-wrap">
                   <div class="img-wrap">
