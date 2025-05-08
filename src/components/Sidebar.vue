@@ -12,7 +12,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-import { toPageTop, scrollToView } from '@web-xhh/web-utils'
+import { toPageTop } from '@web-xhh/web-utils'
 
 let isFixedBar = ref(false)
 let showToTop = ref(false)
@@ -62,11 +62,23 @@ function pageScroll() {
 }
 // 去今日秒杀
 function goChannels() {
-  scrollToView(channelPart.value)
+  // scrollToView(channelPart.value)
+  let siteNavFixedHeight = document.getElementById('site-nav').offsetHeight
+  let channelRectTop1 = channelPart.value.getBoundingClientRect().top || {}
+  window.scrollTo({
+    top: window.scrollY + channelRectTop1 - siteNavFixedHeight,
+    behavior: 'smooth'
+  })
 }
 // 去为你推荐
 function goRecommend() {
-  scrollToView(recommendPart.value)
+  // scrollToView(recommendPart.value)
+  let siteNavFixedHeight = document.getElementById('site-nav').offsetHeight
+  let recommendRectTop1 = recommendPart.value.getBoundingClientRect().top || {}
+  window.scrollTo({
+    top: window.scrollY + recommendRectTop1 - siteNavFixedHeight,
+    behavior: 'smooth'
+  })
 }
 </script>
 
