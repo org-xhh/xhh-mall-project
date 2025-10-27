@@ -1,1 +1,0 @@
-import{b as o}from"./router.D2Dd9x1d.js";import{C as s,D as l,Z as e,u as r,B as u}from"./vue.Dnj0kA0H.js";const p={__name:"waterfall",props:["a","b"],setup(a){let n=o(),{query:t}=n;return(i,c)=>(u(),s("div",null,[l("main",null,"waterfall - "+e(r(t).id)+" - "+e(r(t).title),1),l("div",null,e(a.a)+" - "+e(a.b),1)]))}};export{p as default};
