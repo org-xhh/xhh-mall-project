@@ -15,63 +15,54 @@
                 <source :src="goodsPreviewImgs[currentImgIndex].video" autostart="false" />
                 Your browser does not support the video tag.
               </video>
-              <el-icon class="circle-close" @click="closePlayVideo" :size="35"><CircleClose /></el-icon>
+              <el-icon class="circle-close" @click="closePlayVideo" :size="35">
+                <CircleClose />
+              </el-icon>
             </div>
             <div v-else class="img-outer">
               <img :src="goodsPreviewImgs[currentImgIndex].videocover" />
-              <el-icon size="55" class="play-icon" @click="goPlayVideo"><VideoPlay /></el-icon>
+              <el-icon size="55" class="play-icon" @click="goPlayVideo">
+                <VideoPlay />
+              </el-icon>
             </div>
           </div>
           <div v-else class="preview-top">
             <img :src="goodsPreviewImgs[currentImgIndex].imgUrl" />
-            <div
-              class="img-cover"
-              @mouseenter="imgMouseEnter"
-              @mousemove="imgMouseMove"
-              @mouseleave="imgMouseLeave"
-            ></div>
+            <div class="img-cover" @mouseenter="imgMouseEnter" @mousemove="imgMouseMove" @mouseleave="imgMouseLeave">
+            </div>
             <div v-if="isShowEnterBg" class="mouse-enter-bg" :style="enterBgStyle"></div>
           </div>
           <div v-if="isShowZoomImg" class="zoom-img">
             <img :src="goodsPreviewImgs[currentImgIndex].imgUrl" :style="zoomImgStyle" />
           </div>
           <div class="preview-bottom flex">
-            <div
-              class="direct-arrow left-arrow"
-              v-throttle="['click', 500]"
-              @click="preImg()"
-              :class="{ 'disabled': leftArrowDisabled }"
-            >
-              <el-icon size="20"><ArrowLeft /></el-icon>
+            <div class="direct-arrow left-arrow" v-throttle="['click', 500]" @click="preImg()"
+              :class="{ 'disabled': leftArrowDisabled }">
+              <el-icon size="20">
+                <ArrowLeft />
+              </el-icon>
             </div>
             <div class="spec-ul-wrap flex1">
               <ul class="img-spec-ul flex">
-                <li
-                  v-for="(item, index) in goodsPreviewImgs"
-                  :key="index"
-                  class="spec-li"
-                  :class="{ 'spec-li-active': currentImgIndex === index }"
-                  @mouseenter="amplifyImg(index, item)"
-                >
+                <li v-for="(item, index) in goodsPreviewImgs" :key="index" class="spec-li"
+                  :class="{ 'spec-li-active': currentImgIndex === index }" @mouseenter="amplifyImg(index, item)">
                   <img :src="item.imgUrl || item.videocover" />
                 </li>
               </ul>
             </div>
-            <div
-              class="direct-arrow right-arrow"
-              v-throttle="['click', 500]"
-              @click="nextImg()"
-              :class="{ 'disabled': rightArrowDisabled }"
-            >
-              <el-icon size="20"><ArrowRight /></el-icon>
+            <div class="direct-arrow right-arrow" v-throttle="['click', 500]" @click="nextImg()"
+              :class="{ 'disabled': rightArrowDisabled }">
+              <el-icon size="20">
+                <ArrowRight />
+              </el-icon>
             </div>
           </div>
         </div>
         <div class="goods-info-right flex1">
           <div class="info-top">商品信息</div>
           <div class="add-cart-wrap">
-            <button class="add-cart" @click="addShopCart">加入购物车</button>
-            <button class="to-buy" @click="goConfirmOrder">立即购买</button>
+            <button class="add-cart" key="1" v-eventThrottle="[(e) => addShopCart(e), 1000]">加入购物车</button>
+            <button class="to-buy" key="2" v-eventThrottle="[() => goConfirmOrder(), 1000]">立即购买</button>
           </div>
         </div>
       </div>
@@ -80,24 +71,15 @@
     <div class="goods-detail-part">
       <div class="goods-detail-content main-b-width">
         <ul class="detail-tab flex" :class="{ 'fixed-detail-tab': isFixedDetailTab }">
-          <li
-            v-for="(item, index) in detailTabList"
-            :key="index"
-            class="detail-tab-li flex-center"
-            :class="{ 'tab-active': tabIndex === index }"
-            @click="clickDetailTab(index)"
-          >
+          <li v-for="(item, index) in detailTabList" :key="index" class="detail-tab-li flex-center"
+            :class="{ 'tab-active': tabIndex === index }" @click="clickDetailTab(index)">
             {{ item.content }}
           </li>
         </ul>
         <div class="detail-content-wrap" :style="{ 'padding-top': isFixedDetailTab ? tabHeight + 'px' : '0' }">
           <template v-for="(item, index) in detailTabListContent">
-            <div
-              v-if="showConCount > detailTabListContent.length - index - 1"
-              :key="index"
-              :id="'detail-content' + (index + 1)"
-              class="detail-content"
-            >
+            <div v-if="showConCount > detailTabListContent.length - index - 1" :key="index"
+              :id="'detail-content' + (index + 1)" class="detail-content">
               {{ item.content }}
             </div>
           </template>
@@ -376,29 +358,36 @@ function goConfirmOrder() {
 <style scoped lang="less">
 .goods-detail-page {
   background: #fff;
+
   .site-nav {
     border-bottom: none;
   }
+
   header {
     border-bottom: none;
   }
+
   .gap {
     width: 100%;
     height: 10px;
     background-color: @bg-gray-color;
   }
+
   .goods-part {
     .goods-content {
       background-color: #fff;
       padding-top: 6px;
+
       .goods-preview-left {
         position: relative; // 右侧放大图片看细节的图片定位使用
         width: 400px;
+
         .video-top {
           position: relative;
           width: 100%;
           height: 400px;
           border: 1px solid @border-line-color;
+
           .video-outer {
             .circle-close {
               position: absolute;
@@ -408,6 +397,7 @@ function goConfirmOrder() {
               color: @primary-color;
             }
           }
+
           .img-outer {
             position: absolute;
             left: 0;
@@ -416,6 +406,7 @@ function goConfirmOrder() {
             bottom: 0;
             width: 100%;
             height: 100%;
+
             img {
               position: absolute;
               left: 0;
@@ -425,6 +416,7 @@ function goConfirmOrder() {
               width: 100%;
               height: 100%;
             }
+
             .play-icon {
               position: absolute;
               top: 50%;
@@ -435,12 +427,14 @@ function goConfirmOrder() {
             }
           }
         }
+
         .preview-top {
           position: relative;
           width: 100%;
           height: 400px;
           border: 1px solid @border-line-color;
-          > img {
+
+          >img {
             position: absolute;
             left: 0;
             top: 0;
@@ -449,6 +443,7 @@ function goConfirmOrder() {
             width: 100%;
             height: 100%;
           }
+
           .img-cover {
             position: absolute;
             left: 0;
@@ -459,6 +454,7 @@ function goConfirmOrder() {
             width: 100%;
             height: 100%;
           }
+
           .mouse-enter-bg {
             position: absolute;
             left: 0;
@@ -471,6 +467,7 @@ function goConfirmOrder() {
             opacity: 0.3;
           }
         }
+
         .zoom-img {
           position: absolute;
           left: 410px;
@@ -478,6 +475,7 @@ function goConfirmOrder() {
           width: 400px;
           height: 400px;
           overflow: hidden;
+
           img {
             position: absolute;
             left: 0;
@@ -488,9 +486,11 @@ function goConfirmOrder() {
             height: 200%;
           }
         }
+
         .preview-bottom {
           margin-top: 12px;
           height: 90px;
+
           .direct-arrow {
             width: 29px;
             height: 100%;
@@ -498,23 +498,29 @@ function goConfirmOrder() {
             text-align: center;
             border: 1px solid @border-line-color;
             cursor: pointer;
+
             &.left-arrow {
               margin-right: 12px;
             }
+
             &.right-arrow {
               margin-left: 12px;
             }
+
             &.disabled {
               cursor: not-allowed;
               color: @disabled-font-color;
             }
           }
+
           .spec-ul-wrap {
             width: 314px;
             overflow: hidden;
+
             .img-spec-ul {
               position: relative;
               left: 0;
+
               .spec-li {
                 width: 90px;
                 height: 90px;
@@ -522,9 +528,11 @@ function goConfirmOrder() {
                 cursor: pointer;
                 margin: 0 8px;
                 flex-shrink: 0; // 宽度不被压缩
+
                 &.spec-li-active {
                   border-color: @primary-color;
                 }
+
                 img {
                   width: 100%;
                   height: 100%;
@@ -534,13 +542,17 @@ function goConfirmOrder() {
           }
         }
       }
+
       .goods-info-right {
         margin-left: 30px;
+
         .info-top {
           height: 420px;
         }
+
         .add-cart-wrap {
           padding-left: 300px;
+
           button {
             height: 46px;
             line-height: 46px;
@@ -552,16 +564,20 @@ function goConfirmOrder() {
             outline: none;
             cursor: pointer;
             border-radius: 4px;
+
             &:focus {
               border: none;
               outline: none;
             }
+
             &:not(:first-child) {
               margin-left: 25px;
             }
+
             &.add-cart {
               background-color: @primary-color;
             }
+
             &.to-buy {
               background-color: @orange-color;
             }
@@ -570,51 +586,65 @@ function goConfirmOrder() {
       }
     }
   }
+
   .goods-detail-part {
     margin-top: 40px;
+
     .goods-detail-content {
       background-color: #fff;
+
       .detail-tab {
         top: 0;
         width: 100%;
         background-color: @bg-gray-color;
         border: 1px solid @border-line-color;
         border-bottom: 1px solid @primary-color;
+
         &.fixed-detail-tab {
           position: fixed;
         }
+
         .detail-tab-li {
           padding: 10px 25px;
           font-size: 14px;
           cursor: pointer;
           transition: background-color 0.2s;
+
           &.tab-active {
             background: @primary-color;
             color: #fff;
+
             &:hover {
               color: #fff;
             }
           }
+
           &:hover {
             color: @primary-color;
           }
         }
       }
+
       .detail-content {
         background-color: @light-gray-color;
         border-bottom: 1px solid @border-line-color;
+
         &#detail-content1 {
           height: 650px;
         }
+
         &#detail-content2 {
           height: 800px;
         }
+
         &#detail-content3 {
           height: 450px;
         }
+
         &#detail-content4 {
           height: 780px;
         }
+
         &#detail-content5 {
           height: 755px;
         }
