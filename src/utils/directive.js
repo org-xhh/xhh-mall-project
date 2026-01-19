@@ -1,7 +1,8 @@
 const handleThrottle = {
   mounted(el, binding) {
     let value = binding.value || []
-    let eventType = value[0] || 'click' // 默认click事件
+    let defaultEventType = el.tagName === 'INPUT' ? 'input' : 'click'
+    let eventType = value[0] || defaultEventType
     let throttleTime = value[1] || 1000 // 若不设置防抖时间，默认1s
 
     let cbFun
@@ -23,7 +24,6 @@ const handleThrottle = {
 }
 
 import { throttle, debounce, trimFn } from '@web-xhh/web-utils'
-// 一个页面只能绑一个，不然同时会挂载多个dom
 const eventThrottle = {
   mounted(el, binding) {
     let executeFunction
